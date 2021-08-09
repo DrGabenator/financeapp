@@ -4,8 +4,8 @@ object Versions {
     const val kotlin = "1.4.0"
 
     //libs
-    val coreKtx = "1.2.0"
-    val appcompat = "1.3.0-alpha01"
+    val coreKtx = "1.6.0"
+    val appcompat = "1.3.1"
     val constraintLayout = "2.0.0-beta8"
 
     //test
