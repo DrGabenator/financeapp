@@ -1,58 +1,156 @@
-import org.gradle.api.artifacts.dsl.DependencyHandler
+object Lib {
 
-object AppDependencies {
-    //std lib
-    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    object Kotlin {
 
-    //android ui
-    private val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    private val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
-    private val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val version = "1.4.0"
 
-    //test libs
-    private val junit = "junit:junit:${Versions.junit}"
-    private val extJUnit = "androidx.test.ext:junit:${Versions.extJunit}"
-    private val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
 
-    val appLibraries = arrayListOf<String>().apply {
-        add(kotlinStdLib)
-        add(coreKtx)
-        add(appcompat)
-        add(constraintLayout)
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+
+        object CoroutinesAdapter {
+            const val version = "0.9.2"
+
+            const val coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+
+        }
+
     }
 
-    val androidTestLibraries = arrayListOf<String>().apply {
-        add(extJUnit)
-        add(espressoCore)
+    object AndroidX {
+        private const val navigationVersion = "2.3.4"
+
+        object Test {
+
+            private const val version = "1.1.0"
+
+            const val runner = "androidx.test:runner:$version"
+            const val core = "androidx.test:core:$version"
+            const val extJunit = "androidx.test.ext:junit-ktx:$version"
+
+        }
+
+        object Navigation {
+            const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+            const val ui = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+        }
+
+        object Espresso {
+            private const val version = "3.1.0"
+            const val core = "androidx.test.espresso:espresso-core:$version"
+            const val contrib = "androidx.test.espresso:espresso-contrib:$version"
+        }
+
+        object Lifecycle {
+            private const val viewModelVersion = "2.0.0"
+            private const val liveDataVersion = "2.3.0"
+
+            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+            const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion"
+        }
+
+        object Arch {
+            private const val version = "2.1.0"
+            const val core = "androidx.arch.core:core-testing:$version"
+        }
+
+        object AppCompat {
+            private const val version = "1.3.1"
+
+            const val appcompat = "androidx.appcompat:appcompat:$version"
+        }
+
+        object ConstraintLayout {
+            private const val version = "2.0.4"
+
+            const val constraintLayout = "androidx.constraintlayout:constraintlayout:$version"
+        }
     }
 
-    val testLibraries = arrayListOf<String>().apply {
-        add(junit)
+
+    object Room {
+        private const val roomVersion = "2.3.0"
+
+        const val runtime = "androidx.room:room-runtime:$roomVersion"
+        const val compiler = "androidx.room:room-compiler:$roomVersion"
+        const val ktx = "androidx.room:room-ktx:$roomVersion"
     }
+
+    object Material {
+        private const val version = "1.4.0"
+
+        const val material = "com.google.android.material:material:$version"
+    }
+
+    object Retrofit {
+        private const val version = "2.9.0"
+
+        const val retrofit2 = "com.squareup.retrofit2:retrofit:$version"
+
+    }
+
+    object Gson {
+        private const val version = "2.3.0"
+        const val converterGson = "com.squareup.retrofit2:converter-gson:$version"
+        const val scalarsGson = "com.squareup.retrofit2:converter-scalars:2.6.0"
+
+    }
+
+    object Test {
+        object Kotlinx {
+            private const val version = "1.5.1"
+            const val kotlinx = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
+        }
+
+        object Junit {
+            private const val version = "4.12"
+
+            const val junit = "junit:junit:$version"
+        }
+
+        object Mockito {
+            private const val mockitoVersion = "2.27.0"
+
+            private const val mockitoKotlinVersion = "2.1.0"
+
+            const val mockito = "org.mockito:mockito-core:$mockitoVersion"
+
+            const val mockitoKotlin =
+                "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+        }
+
+        object Mockk {
+            private const val version = "1.12.0"
+
+            const val mockk = "io.mockk:mockk:$version"
+        }
+
+    }
+
+    object Okhttp {
+        private const val version = "4.9.0"
+        const val okhttp = "com.squareup.okhttp3:okhttp:$version"
+        const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    }
+
+    object Koin {
+        private const val version = "3.1.2"
+
+        const val koinCore = "io.insert-koin:koin-core:$version"
+        const val koinTest = "io.insert-koin:koin-test:$version"
+        const val koinAndroid = "io.insert-koin:koin-android:$version"
+        const val extAndroid = "io.insert-koin:koin-android-ext:$version"
+    }
+
+    object Picasso {
+        private const val version = "2.71828"
+        const val picasso = "com.squareup.picasso:picasso:$version"
+    }
+
+    object CircleViewImage {
+        private const val version = "3.1.0"
+        const val lib = "de.hdodenhof:circleimageview:$version"
+    }
+
 }
 
-//util functions for adding the different type dependencies from build.gradle file
-fun DependencyHandler.kapt(list: List<String>) {
-    list.forEach { dependency ->
-        add("kapt", dependency)
-    }
-}
-
-fun DependencyHandler.implementation(list: List<String>) {
-    list.forEach { dependency ->
-        add("implementation", dependency)
-    }
-}
-
-fun DependencyHandler.androidTestImplementation(list: List<String>) {
-    list.forEach { dependency ->
-        add("androidTestImplementation", dependency)
-    }
-}
-
-fun DependencyHandler.testImplementation(list: List<String>) {
-    list.forEach { dependency ->
-        add("testImplementation", dependency)
-    }
-}

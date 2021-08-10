@@ -36,11 +36,19 @@ android {
 }
 
 dependencies {
-    //std lib
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //app libs
-    implementation(AppDependencies.appLibraries)
-    //test libs
-    testImplementation(AppDependencies.testLibraries)
-    androidTestImplementation(AppDependencies.androidTestLibraries)
+
+    implementation(Lib.AndroidX.ConstraintLayout.constraintLayout)
+    implementation(Lib.AndroidX.AppCompat.appcompat)
+    implementation(Lib.AndroidX.Lifecycle.livedata)
+    implementation(Lib.AndroidX.Lifecycle.viewmodel)
+    implementation(Lib.AndroidX.Navigation.fragment)
+    implementation(Lib.AndroidX.Navigation.ui)
+
+    implementation(Lib.Material.material)
+
+    implementation(Lib.Kotlin.stdlib)
+
+    implementation(Lib.Koin.koinCore)
+    implementation(Lib.Koin.koinTest)
+    implementation(Lib.Koin.koinAndroid)
 }
