@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":network")))
 
     implementation(Lib.AndroidX.ConstraintLayout.constraintLayout)
     implementation(Lib.AndroidX.AppCompat.appcompat)
